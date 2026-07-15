@@ -96,6 +96,40 @@ Live status is written to `/tmp/g29_status.txt`.
 > so re-run after replugging. (Want it automatic? See
 > [Auto-start](#auto-start-optional).)
 
+### Quick launch (double-click)
+
+Don't want to open a terminal every time? **Double-click `start-g29.command`**
+in Finder — it opens Terminal and runs `auto` for you (with a guard so a second
+double-click won't stack a duplicate). `Ctrl-C` or closing the window stops it.
+
+First time only, macOS may need you to allow it: right-click → **Open**, or
+`chmod +x start-g29.command`.
+
+Want a real app icon in your Dock/Launchpad? Wrap it in a tiny `.app`:
+
+```sh
+APP="$HOME/Applications/Start G29.app"
+mkdir -p "$APP/Contents/MacOS"
+cat > "$APP/Contents/MacOS/startg29" <<EOF
+#!/bin/bash
+open "$(pwd)/start-g29.command"
+EOF
+chmod +x "$APP/Contents/MacOS/startg29"
+cat > "$APP/Contents/Info.plist" <<'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>CFBundleName</key><string>Start G29</string>
+  <key>CFBundleIdentifier</key><string>local.startg29</string>
+  <key>CFBundleVersion</key><string>1.0</string>
+  <key>CFBundlePackageType</key><string>APPL</string>
+  <key>CFBundleExecutable</key><string>startg29</string>
+</dict></plist>
+EOF
+```
+
+Now "Start G29" shows up in Spotlight/Launchpad and can live in your Dock.
+
 ### Tuning `auto`
 
 ```sh
