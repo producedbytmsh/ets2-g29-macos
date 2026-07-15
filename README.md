@@ -36,7 +36,7 @@ telemetry.
 
 ## Requirements
 
-- macOS (built and tested on Apple Silicon, macOS 15)
+- macOS (built and tested on Apple Silicon, macOS 26 Tahoe / 26.5.2)
 - A Logitech **G29** (VID `046d`, PID `c24f`). Other wheels use a different FFB
   protocol — see [Other wheels](#other-wheels).
 - `hidapi`:
